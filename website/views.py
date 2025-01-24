@@ -35,3 +35,13 @@ def delete_note():
             db.session.commit()
 
     return jsonify({})
+
+
+@views.route('/popup_poem')
+def popup_poem():
+    return render_template('popup_poem.html')
+
+@views.route('/popup_quote')
+def popup_quoate():
+    return render_template('popup_quote.html')
+
