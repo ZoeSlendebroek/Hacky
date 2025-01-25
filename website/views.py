@@ -55,13 +55,22 @@ def home():
 
     return render_template("home.html", user=current_user)
 
-
 @views.route('/popup_poem', methods=['GET'])
 @login_required
 def popup_poem():
     try:
-        # Generate or fetch the poem (mock data for now)
-        poem = "This is a dynamically generated poem about life and beauty."
+        # Fetch the most recent poem for the current user
+        poem_entry = (
+            Book.query.filter_by(user_id=current_user.id)
+            .filter(Book.poem.isnot(None))  # Ensure only entries with poems are fetched
+            .order_by(Book.date.desc())  # Order by date in descending order
+            .first()
+        )
+
+        if not poem_entry:
+            raise ValueError("No poems found for the current user.")
+
+        poem = poem_entry.poem
         return render_template('popup_poem.html', poem=poem)
     except Exception as e:
         return render_template('popup_poem.html', poem=f"Error: {e}")
@@ -71,28 +80,47 @@ def popup_poem():
 @login_required
 def popup_quote():
     try:
-        # Generate or fetch the poem (mock data in this case)
-        quote = "this is a fake quote"
+        # Fetch the most recent quote for the current user
+        quote_entry = (
+            Book.query.filter_by(user_id=current_user.id)
+            .filter(Book.quote.isnot(None))  # Ensure only entries with quotes are fetched
+            .order_by(Book.date.desc())  # Order by date in descending order
+            .first()
+        )
+
+        if not quote_entry:
+            raise ValueError("No quotes found for the current user.")
+
+        quote = quote_entry.quote
         return render_template('popup_quote.html', quote=quote)
     except Exception as e:
         return render_template('popup_quote.html', quote=f"Error: {e}")
+
 
 @views.route('/popup_entry', methods=['GET'])
 @login_required
 def popup_entry():
     try:
         # Fetch all notes for the current user, sorted by date in descending order
+        print(f"DEBUG: Current user ID: {current_user.id}")
         entries = (
             Note.query.filter_by(user_id=current_user.id)
             .order_by(Note.id.desc())
             .all()
         )
 
+        # Debugging: Print raw entries from the database
+        print("DEBUG: Raw entries fetched from the database:")
+        for note in entries:
+            print(f"ID: {note.id}, Data: {note.data}, Created At: {note.date}")
+
+
         # Prepare the entries in the format "date : entry"
         formatted_entries = [
-            f"{note.date_created.strftime('%Y-%m-%d %H:%M:%S')} : {note.data}"
+            f"{note.date.strftime('%Y-%m-%d %H:%M:%S')} : {note.data}"
             for note in entries
         ]
+
 
         return render_template('popup_entry.html', entries=formatted_entries)
     except Exception as e:
