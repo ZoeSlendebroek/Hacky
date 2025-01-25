@@ -12,7 +12,6 @@ import os
 # Load environment variables from .env file
 load_dotenv()
 
-# Fetch the OPENAI_KEY from environment variables
 OPENAI_KEY = os.getenv("OPENAI_KEY")
 
 views = Blueprint('views', __name__)
