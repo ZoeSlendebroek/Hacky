@@ -14,6 +14,11 @@
       href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
       crossorigin="anonymous"
     />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Climate+Crisis&display=swap" rel="stylesheet">
+
     <title>{% block title %}Home{% endblock %}</title>
     <style>
       /* Set black text color for navbar links */
@@ -43,21 +48,17 @@
           {% if user.is_authenticated %}
           <!-- Left-Aligned Link -->
           <a
-            class="nav-item nav-link bookshelf-link"
+            class="nav-item nav-link bookshelf-link journal-nook-title"
             id="bookshelf"
             href="{{ url_for('views.bookshelf') }}"
           >
-          <img
-          src="{{ url_for('static', filename='images/journalnook.png') }}"
-          alt="Journal Nook Logo"
-          class="navbar-logo"
-        />
+            Journal Nook
           </a>
         </div>
         <!-- Right-Aligned Links -->
         <div class="navbar-nav ml-auto">
-          <a class="nav-item nav-link" id="home" href="/">Home</a>
-          <a class="nav-item nav-link" id="logout" href="/logout">Logout</a>
+          <a class="nav-item nav-link climate-crisis" id="home" href="/">Home</a>
+          <a class="nav-item nav-link climate-crisis" id="logout" href="/logout">Logout</a>
         </div>
         {% else %}
         <!-- Right-Aligned Links for Non-Authenticated Users -->
@@ -119,22 +120,16 @@
   </body>
 </html>
 
+
 <style>
   .navbar {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 1000;
-    background-color: hsla(0, 0%, 100%, 0);
-    border: none;
-    box-shadow: none;
-    transition: background-color 0.3s ease;
+  background-color: #638eed !important; /* Ensure the navbar background is applied */
+
   }
 
   /* Adjust text colors for better visibility on transparent background */
   .navbar-nav .nav-link {
-    color: black !important;
+    color: white !important;
     font-weight: bold;
   }
 
@@ -146,64 +141,134 @@
   margin-bottom: 35px; /* Adds space below the heading */
   }
 
-  .center-wrapper {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: calc(100vh - 300px); /* Adjust for navbar height */
-  text-align: center;
-  margin: 0;
-  }
-
-  /* Increase the container size */
-  .wide-container {
-  width: 90%; /* Make the container wider */
-  max-width: 1200px; /* Allow it to stretch more on larger screens */
-  margin: 0 auto; /* Center it horizontally */
-  text-align: center;
-  }
-
-/* Make the text box extra large */
-  .extra-large-textbox {
-  resize: none; /* Disable resizing */
-  width: 100%; /* Full width of the container */
-  height: 500px; /* Increased height */
-  padding: 20px; /* Add extra padding for comfort */
-  font-size: 18px; /* Increase font size for readability */
-  border: 1px solid #ced4da; /* Border styling */
-  border-radius: 6px; /* Smooth rounded corners */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for a modern look */
-  }
+ 
 
   .navbar-logo {
-  height: 100px; /* Adjust to the desired logo height */
+  height: 80px; /* Adjust to the desired logo height */
   width: auto; /* Maintain aspect ratio */
   margin-right: 10px; /* Optional: Add spacing if needed */
   }
 
-  .btn-custom {
-  background-color: #004F70; /* Set the button background color */
-  border-color: #004F70; /* Match the border color */
-  color: white; /* Set the text color to white for contrast */
-  font-family: 'Helvetica', sans-serif;
-  font-weight: bold; /* Make the text bold (optional) */
-  font-size: 12px; /* Set the font size smaller */
-  padding: 8px 16px; /* Adjust padding to match the smaller font */
-  border-radius: 4px; /* Optional: Slightly rounded corners */
+
+
+/* Reset body and html for full-screen coverage */
+html, body {
+  background-color: #638eed;
+  margin: 0;
+  padding: 0;
+  width: 100%; /* Ensure full width of the viewport */
+  height: 100%; /* Ensure full height of the viewport */
+  overflow-x: hidden; /* Prevent horizontal scrolling */
 }
 
-.btn-custom:hover {
-  background-color: #003A53; /* Slightly darker shade for hover effect */
-  border-color: #003A53; /* Match the border color on hover */
-  color: white; /* Ensure the text color remains white */
+.journal-nook-title {
+  font-family: 'Climate Crisis', sans-serif;
+  font-size: 32px; /* Larger font size for emphasis */
+  font-weight: 400; /* Regular weight */
+  font-style: normal; /* Normal style */
+  color: white; /* Set the font color */
+  letter-spacing: 2px; /* Optional: Add spacing between letters for emphasis */
+  margin-right: 20px; /* Add spacing between the title and the next link */
 }
 
-.custom-font {
-  font-family: 'Papyrus', sans-serif; /* Set font to Papyrus */
-  font-size: 45px; /* Adjust font size as needed */
-  font-weight: normal; /* Optional: Adjust font weight */
-  color: #004F70; /* Optional: Change font color to match your design */
+.climate-crisis {
+  font-family: 'Climate Crisis', serif; /* Use the Climate Crisis font */
+  font-optical-sizing: auto; /* Enable automatic optical sizing */
+  font-weight: 400; /* Regular font weight */
+  font-style: normal; /* Regular font style */
+  font-size: 18px; /* Adjust font size to your preference */
+  font-variation-settings: "YEAR" 1979; /* Optional: Use variation settings if needed */
+  color: white;
+}
+
+.climate-crisis-heading {
+  font-family: 'Climate Crisis', serif; /* Use the Climate Crisis font */
+  font-size: 30px; /* Adjust the font size to make it larger */
+  font-weight: normal; /* Optional: Keep the default font weight */
+  line-height: 1.2; /* Optional: Adjust line spacing if needed */
+  text-align: center; /* Ensure the text is centered */
+  color: white; /* Optional: Set a custom color */
+  margin-bottom: 20px; /* Add space below the heading */
+}
+
+.scrolling-text {
+ position: fixed; /* Keep the text fixed at the bottom */
+ bottom: 20px; /* Align to the bottom of the viewport */
+ width: 100%; /* Full width of the page */
+ color: white; /* Text color */
+ font-size: 20px; /* Adjust text size */
+ font-weight: bold; /* Make the text bold */
+ text-align: center; /* Center-align the text */
+ overflow: hidden; /* Hide any overflow */
+}
+
+
+.scrolling-text p {
+  display: inline-block;
+  white-space: nowrap; /* Prevent text from wrapping */
+  animation: scroll 50s linear infinite; /* Smooth infinite scrolling */
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateX(100%); /* Start text off-screen on the right */
+  }
+  100% {
+    transform: translateX(-100%); /* Move text off-screen to the left */
+  }
+}
+
+
+
+
+
+.background-image {
+ position: absolute;
+ top: 0;
+ left: 0;
+ width: 100%; /* Full width of the container */
+ height: 100%; /* Full height of the container */
+ z-index: -1; /* Pushes the image behind the text */
+}
+
+
+
+
+/* Heading Container for Positioning */
+.heading-container {
+ position: absolute;
+ top: 10%; /* Adjust vertical position */
+ left: 5%; /* Adjust horizontal alignment */
+ background-image: url('{{ url_for("static", filename="images/cloud.png") }}'); /* Path to your PNG */
+ background-size: cover; /* Ensures the image covers the container */
+ background-position: center; /* Centers the image */
+ background-repeat: no-repeat; /* Prevents tiling */
+ width: 27%; /* Adjust width as needed */
+ height: auto; /* Adjust height as needed */
+ padding: 40px; /* Add padding for spacing */
+}
+
+
+
+/* Left-aligned Heading */
+.left-aligned-heading {
+  font-family: 'Climate Crisis', serif; /* Climate Crisis font */
+  color: white; /* Text color */
+  text-align: left; /* Ensure left alignment */
+  margin: 0; /* Remove extra margins */
+  line-height: 1.2; /* Line spacing between the lines */
+}
+
+/* Smaller Text for "What’s on" */
+.small-text {
+  font-size: 60px; /* Smaller font size */
+  font-weight: normal; /* Optional: Keep lighter weight */
+}
+
+/* Larger Text for "your mind?" */
+.large-text {
+  font-size: 80px; /* Larger font size */
+  font-weight: bold; /* Optional: Make it bold */
 }
 
 </style>
