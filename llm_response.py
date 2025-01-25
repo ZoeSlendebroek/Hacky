@@ -49,9 +49,11 @@ class LLMResponse:
             "context": self.journal,
             "question": question
         })
-        
+
+        # Get the model's response
         json_out = self.model.with_structured_output(schema)
         return json_out.invoke(prompt)
+        
     
     def poem_response(self):
         question = """
