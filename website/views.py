@@ -59,18 +59,9 @@ def home():
 @views.route('/popup_poem', methods=['GET'])
 @login_required
 def popup_poem():
-    # Mock response as placeholder
-    # Replace this section with the actual API call when ready
     try:
-        # Uncomment when API is ready
-        # response = requests.get(API_POEM_URL, timeout=5)
-        # if response.status_code == 200:
-        #     poem = response.json().get('poem', 'No poem available.')
-        # else:
-        #     poem = "Failed to fetch poem from API."
-        
-        # Mock data for now
-        poem = "This is a placeholder poem about life and beauty."
+        # Generate or fetch the poem (mock data for now)
+        poem = "This is a dynamically generated poem about life and beauty."
         return render_template('popup_poem.html', poem=poem)
     except Exception as e:
         return render_template('popup_poem.html', poem=f"Error: {e}")
@@ -79,21 +70,13 @@ def popup_poem():
 @views.route('/popup_quote', methods=['GET'])
 @login_required
 def popup_quote():
-    # Mock response as placeholder
-    # Replace this section with the actual API call when ready
     try:
-        # Uncomment when API is ready
-        # response = requests.get(API_QUOTE_URL, timeout=5)
-        # if response.status_code == 200:
-        #     quote = response.json().get('quote', 'No quote available.')
-        # else:
-        #     quote = "Failed to fetch quote from API."
-
-        # Mock data for now
-        quote = "This is a placeholder quote: 'To be or not to be.'"
+        # Generate or fetch the poem (mock data in this case)
+        quote = "this is a fake quote"
         return render_template('popup_quote.html', quote=quote)
     except Exception as e:
         return render_template('popup_quote.html', quote=f"Error: {e}")
+
 
 @views.route('/bookshelf', methods=['GET'])
 @login_required

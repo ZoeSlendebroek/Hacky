@@ -6,8 +6,8 @@
 
   <!-- Buttons to Trigger Popups -->
   <div align="center" style="margin-top: 20px;">
-    <button class="btn btn-info" onClick="openPopup('{{ url_for('views.popup_poem') }}')">Poem</button>
-    <button class="btn btn-info" onClick="openPopup('{{ url_for('views.popup_quote') }}')">Quote</button>
+    <button class="custom-button poem" onClick="openPopup('{{ url_for('views.popup_poem') }}')">Poem</button>
+    <button class="custom-button quote" onClick="openPopup('{{ url_for('views.popup_quote') }}')">Quote</button>
   </div>
 
   <!-- Modal for Popups -->
@@ -23,20 +23,36 @@
 <script>
   function openPopup(url) {
     fetch(url)
-      .then((response) => response.text())
-      .then((data) => {
-        document.getElementById('popup-content').innerHTML = data;
-        document.getElementById('popup').style.display = 'block';
-        document.getElementById('popup-overlay').style.display = 'block';
-      })
-      .catch((error) => {
-        console.error('Error fetching popup content:', error);
-        document.getElementById('popup-content').innerHTML =
-          '<p>Error loading content. Please try again later.</p>';
-        document.getElementById('popup').style.display = 'block';
-        document.getElementById('popup-overlay').style.display = 'block';
-      });
-  }
+        .then((response) => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return response.text();
+        })
+        .then((data) => {
+            // Create a temporary DOM parser
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(data, 'text/html');
+
+            // Extract the content inside the <body> tag
+            const modalContent = doc.querySelector('body').innerHTML;
+
+            // Inject the extracted content into the modal
+            document.getElementById('popup-content').innerHTML = modalContent;
+
+            // Show the modal and overlay
+            document.getElementById('popup').style.display = 'block';
+            document.getElementById('popup-overlay').style.display = 'block';
+        })
+        .catch((error) => {
+            console.error('Error fetching popup content:', error);
+            document.getElementById('popup-content').innerHTML =
+                '<p>Error loading content. Please try again later.</p>';
+            document.getElementById('popup').style.display = 'block';
+            document.getElementById('popup-overlay').style.display = 'block';
+        });
+}
+
 
   function closePopup() {
     document.getElementById('popup').style.display = 'none';
@@ -46,18 +62,45 @@
 
 <style>
   /* Add background image specifically for this page */
-  /* Add background image specifically for this page */
+.container{
+    margin:0;
+    padding:0;
+}
 .bookshelf-container {
     background: url("{{ url_for('static', filename='images/bookshelf_bg.jpg') }}") no-repeat center center fixed;
     background-size: cover; /* Ensures the image covers the entire area */
     background-attachment: fixed; /* Makes the background image fixed during scroll */
     min-width: 100vw;
     min-height: 100vh; /* Ensures the background covers the entire viewport height */
+    margin: 0; /* Removes default margins */
+    padding: 0; /* Removes default paddings */
     color: white;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+}
+
+/* Base styles for custom buttons */
+.custom-button {
+    position: absolute; /* Allows precise positioning */
+    width: 100px; /* Adjust size as needed */
+    height: 400px; /* Adjust size as needed */
+    opacity: 50; /* Fully transparent */
+    background: yellowgreen; /* Ensure no background */
+    border: none; /* Remove border */
+    cursor: pointer; /* Maintain clickable functionality */
+}
+
+/* Custom positions for each button */
+.poem {
+    top: 10%; /* Adjust as needed */
+    left: 20%; /* Adjust as needed */
+}
+
+.quote {
+    top: 10%; /* Adjust as needed */
+    left: 45%; /* Adjust as needed */
 }
 
 
