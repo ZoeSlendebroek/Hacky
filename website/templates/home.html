@@ -18,26 +18,25 @@
 
 <!-- Text Box Section -->
 <div class="text-box-container mt-4">
- <form method="POST" action="/save-entry">
-   <textarea
-     class="form-control text-box"
-     id="journalEntry"
-     name="journalEntry"
-     rows="5"
-   ></textarea>
-   <button class="button-55" role="button">Save Entry</button>
- </form>
-</div>
-
-
-
-
-   <!-- Link to Bookshelf Page -->
-   <div align="center" style="margin-top: 20px;">
-     <a href="{{ url_for('views.bookshelf') }}" class="button-55">Go to Bookshelf</a>
-   </div>
+  <form method="POST" action="/save-entry">
+    <textarea
+      class="form-control text-box"
+      id="journalEntry"
+      name="journalEntry"
+      rows="5"
+    ></textarea>
+    <div style="margin-top: 10px; display: flex; gap: 20px;">
+      <!-- Save Entry Button -->
+      <button class="button-55" role="button" type="submit">Save Entry</button>
+      <!-- Clear Text Button -->
+      <button class="button-55" role="button" type="button" onclick="clearTextBox()">Clear</button>
+    </div>
+  </form>
  </div>
-</div>
+
+ 
+
+
 
 
  <!-- Scrolling Text -->

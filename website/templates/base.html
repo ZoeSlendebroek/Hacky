@@ -60,6 +60,7 @@
        </div>
        <!-- Right-Aligned Links -->
        <div class="navbar-nav ml-auto">
+         <a class="nav-item nav-link climate-crisis" href="{{ url_for('views.bookshelf') }}">Bookshelf</a>
          <a class="nav-item nav-link climate-crisis" id="home" href="/">Home</a>
          <a class="nav-item nav-link climate-crisis" id="logout" href="/logout">Logout</a>
        </div>
@@ -366,5 +367,31 @@ html, body {
 
 
 
+/* Apply Climate Crisis to headings */
+.climate-crisis-heading {
+ font-family: 'Climate Crisis', serif;
+ font-size: 2rem; /* Adjust size as needed */
+ text-align: center;
+ margin-bottom: 20px;
+ color: white; /* Optional: Customize text color */
+}
+
+
+/* Labels for Email and Password */
+.climate-
+crisis-label {
+ font-family: 'Climate Crisis', serif;
+ font-size: 1.5rem; /* Slightly smaller than the heading */
+ color: white; /* Optional: Customize text color */
+}
+
+
 
 </style>
+
+<script>
+  function clearTextBox() {
+    document.getElementById('journalEntry').value = ''; // Clear the text area
+  }
+ </script>
+ 
