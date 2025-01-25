@@ -169,6 +169,18 @@
       text-align: center;
     }
 
+  .popup-entry {
+    display: flex;
+    justify-content: center; /* Horizontally center the content */
+    align-items: center; /* Vertically center the content */
+    width: 100%; /* Take full width */
+    height: 100%; /* Take full height of the popup */
+    position: relative;
+    text-align: center;
+    flex-direction: column; /* Stack the elements vertically */
+  }
+
+
 
   /* Blurred background effect for the overlay */
   #popup-overlay {
@@ -189,6 +201,12 @@
     }
 
     .Book {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .Entry {
       width: 100%;
       height: auto;
       display: block;
@@ -261,5 +279,21 @@
     .close-popup:hover {
       color: rgb(231, 144, 144);
     }
+      /* New close-entry-popup class for the entry popup */
+      .close-entry-popup {
+    position: absolute;
+    top: 10px;
+    right: 10px; /* Keep it in the upper right corner */
+    background: none;
+    border: none;
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    cursor: pointer;
+  }
+
+  .close-entry-popup:hover {
+    color: rgb(231, 144, 144);
+  }
 </style>
 {% endblock %}
