@@ -6,13 +6,10 @@ import json
 import requests
 from llm_response import LLMResponse
 from langchain_openai import ChatOpenAI
-from dotenv import load_dotenv
-import os
 
-# Load environment variables from .env file
-load_dotenv()
 
-OPENAI_KEY = os.getenv("OPENAI_KEY")
+
+OPENAI_KEY = ""
 
 views = Blueprint('views', __name__)
 
