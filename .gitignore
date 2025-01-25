@@ -3,4 +3,4 @@ website/__pycache__
 website/database.db
 .venv
 venv
-.env
+.env.env
