@@ -7,8 +7,6 @@ import requests
 from llm_response import LLMResponse
 from langchain_openai import ChatOpenAI
 
-
-
 OPENAI_KEY = ""
 
 views = Blueprint('views', __name__)
