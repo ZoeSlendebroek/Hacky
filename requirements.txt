@@ -5,3 +5,4 @@ requests
 flask-migrate
 langchain
 langchain-openai
+python-dotenv

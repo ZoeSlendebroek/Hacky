@@ -6,15 +6,21 @@ import json
 import requests
 from llm_response import LLMResponse
 from langchain_openai import ChatOpenAI
+from dotenv import load_dotenv
+import os
+
+# Load environment variables from .env file
+load_dotenv()
+
+# Fetch the OPENAI_KEY from environment variables
+OPENAI_KEY = os.getenv("OPENAI_KEY")
 
 views = Blueprint('views', __name__)
-API_URL = "https://henry'surl.com/generate" 
-
 
 # model object
-GPT_TOKEN = ""
+OPENAI_API = "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"
 core = ChatOpenAI(
-    openai_api_key=GPT_TOKEN,
+    openai_api_key=OPENAI_KEY,
     temperature=1.5,
     max_tokens=5000,
     model_name="gpt-4o-mini"
