@@ -77,6 +77,27 @@ def popup_quote():
     except Exception as e:
         return render_template('popup_quote.html', quote=f"Error: {e}")
 
+@views.route('/popup_entry', methods=['GET'])
+@login_required
+def popup_entry():
+    try:
+        # Fetch all notes for the current user, sorted by date in descending order
+        entries = (
+            Note.query.filter_by(user_id=current_user.id)
+            .order_by(Note.id.desc())
+            .all()
+        )
+
+        # Prepare the entries in the format "date : entry"
+        formatted_entries = [
+            f"{note.date_created.strftime('%Y-%m-%d %H:%M:%S')} : {note.data}"
+            for note in entries
+        ]
+
+        return render_template('popup_entry.html', entries=formatted_entries)
+    except Exception as e:
+        return render_template('popup_entry.html', entries=[], error=f"Error: {e}")
+
 
 @views.route('/bookshelf', methods=['GET'])
 @login_required

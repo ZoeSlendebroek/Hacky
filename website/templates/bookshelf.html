@@ -10,6 +10,7 @@
     <!-- Hoverable and Clickable Sections -->
     <button class="custom-button poem" onClick="openPopup('{{ url_for('views.popup_poem') }}')">Poem</button>
     <button class="custom-button quote" onClick="openPopup('{{ url_for('views.popup_quote') }}')">Quote</button>
+    <button class="custom-button entry" onClick="openPopup('{{ url_for('views.popup_entry') }}')">Entries</button>
   </div>
 
   <!-- Modal for Popups -->
@@ -66,7 +67,7 @@
 
   .image-container {
     position: relative;
-    width: 80%; /* Adjustable for responsiveness */
+    width: 100%; /* Adjustable for responsiveness */
   }
 
   .centered-image {
@@ -108,32 +109,57 @@
     height: 40%; /* Proportional height */
   }
 
+  .entry {
+    top: 80%;
+    left: 45%;
+    width: 40%; /* Proportional width */
+    height: 10%; /* Proportional height */
+  }
+
   /* Style for the popup modal */
   #popup {
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: white;
-    color: black;
+    background-color: transparent; /* Transparent background */
     padding: 20px;
     border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     z-index: 1000;
-    max-width: 500px;
-    width: 80%;
-    max-height: 80vh;
-    overflow-y: auto;
+    max-width: 800px; /* Increased width for large content */
+    width: 90%; /* Adjust width to ensure enough space */
+    height: auto; /* Let the height adjust based on the content */
+    max-height: none; /* Remove any height restriction */
+    overflow: hidden; /* Remove scrolling */
   }
 
-  #popup-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    z-index: 999;
+ /* Blurred background effect for the overlay */
+#popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4); /* Semi-transparent overlay */
+  backdrop-filter: blur(3px); /* Add blur to the background */
+  z-index: 999;
+}
+
+  /* Style for the "X" close button */
+  .close-popup {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 24px; /* Make the "X" larger */
+    font-weight: bold; /* Ensure it stands out */
+    color: #333; /* Set a neutral color */
+    cursor: pointer; /* Change the cursor to indicate it's clickable */
+  }
+
+  .close-popup:hover {
+    color: rgb(231, 144, 144); /* Optional: Change color on hover */
   }
 </style>
 {% endblock %}
