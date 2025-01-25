@@ -122,8 +122,10 @@ def popup_quote():
         if not quote_entry:
             raise ValueError("No quotes found for the current user.")
 
-        quote = quote_entry.quote
-        return render_template('popup_quote.html', quote=quote)
+        quote = json.loads(quote_entry.quote)
+        quotes = [quote["quote 1"], quote["quote 2"], quote["quote 3"]]
+
+        return render_template('popup_quote.html', quote1=quotes[0], quote2=quotes[1], quote3=quotes[2])
     except Exception as e:
         return render_template('popup_quote.html', quote=f"Error: {e}")
 
