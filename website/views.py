@@ -18,7 +18,6 @@ OPENAI_KEY = os.getenv("OPENAI_KEY")
 views = Blueprint('views', __name__)
 
 # model object
-OPENAI_API = "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"
 core = ChatOpenAI(
     openai_api_key=OPENAI_KEY,
     temperature=1.5,
