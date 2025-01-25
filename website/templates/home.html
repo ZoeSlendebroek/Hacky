@@ -2,18 +2,21 @@
 {% block title %}Home{% endblock %}
 
 {% block content %}
-<h3 align="center">Write your journal today</h3>
+<div class="center-wrapper wide-container">
+  <h3 align="center" class="heading-spacing custom-font">What’s on your mind today?</h3>
 
-<form method="POST">
-  <textarea name="note" id="note" class="form-control"></textarea>
-  <br />
-  <div align="center">
-    <button type="submit" class="btn btn-primary">Add Note</button>
+  <form method="POST">
+    <textarea name="note" id="note" class="form-control extra-large-textbox"></textarea>
+    <br />
+    <div align="center" style="margin-top: 20px;">
+      <button type="submit" class="btn btn-custom">Store in Nook</button>
+    </div>
+  </form>
+
+  <!-- Link to Bookshelf Page -->
+  <div align="center" style="margin-top: 20px;">
+    <a href="{{ url_for('views.bookshelf') }}" class="btn btn-custom">Go to Bookshelf</a>
   </div>
-</form>
-
-<!-- Link to Bookshelf Page -->
-<div align="center" style="margin-top: 20px;">
-  <a href="{{ url_for('views.bookshelf') }}" class="btn btn-info">Go to Bookshelf</a>
 </div>
 {% endblock %}
+
