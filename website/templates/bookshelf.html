@@ -3,9 +3,11 @@
 
 {% block content %}
 <div class="bookshelf-container">
-
-  <!-- Buttons to Trigger Popups -->
-  <div align="center" style="margin-top: 20px;">
+  <!-- Centered Image -->
+  <div class="image-container">
+    <img src="{{ url_for('static', filename='images/bookshelf_bg.jpg') }}" alt="Bookshelf" class="centered-image" />
+    
+    <!-- Hoverable and Clickable Sections -->
     <button class="custom-button poem" onClick="openPopup('{{ url_for('views.popup_poem') }}')">Poem</button>
     <button class="custom-button quote" onClick="openPopup('{{ url_for('views.popup_quote') }}')">Quote</button>
   </div>
@@ -23,36 +25,28 @@
 <script>
   function openPopup(url) {
     fetch(url)
-        .then((response) => {
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-            return response.text();
-        })
-        .then((data) => {
-            // Create a temporary DOM parser
-            const parser = new DOMParser();
-            const doc = parser.parseFromString(data, 'text/html');
-
-            // Extract the content inside the <body> tag
-            const modalContent = doc.querySelector('body').innerHTML;
-
-            // Inject the extracted content into the modal
-            document.getElementById('popup-content').innerHTML = modalContent;
-
-            // Show the modal and overlay
-            document.getElementById('popup').style.display = 'block';
-            document.getElementById('popup-overlay').style.display = 'block';
-        })
-        .catch((error) => {
-            console.error('Error fetching popup content:', error);
-            document.getElementById('popup-content').innerHTML =
-                '<p>Error loading content. Please try again later.</p>';
-            document.getElementById('popup').style.display = 'block';
-            document.getElementById('popup-overlay').style.display = 'block';
-        });
-}
-
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.text();
+      })
+      .then((data) => {
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(data, 'text/html');
+        const modalContent = doc.querySelector('body').innerHTML;
+        document.getElementById('popup-content').innerHTML = modalContent;
+        document.getElementById('popup').style.display = 'block';
+        document.getElementById('popup-overlay').style.display = 'block';
+      })
+      .catch((error) => {
+        console.error('Error fetching popup content:', error);
+        document.getElementById('popup-content').innerHTML =
+          '<p>Error loading content. Please try again later.</p>';
+        document.getElementById('popup').style.display = 'block';
+        document.getElementById('popup-overlay').style.display = 'block';
+      });
+  }
 
   function closePopup() {
     document.getElementById('popup').style.display = 'none';
@@ -61,48 +55,58 @@
 </script>
 
 <style>
-  /* Add background image specifically for this page */
-.container{
-    margin:0;
-    padding:0;
-}
-.bookshelf-container {
-    background: url("{{ url_for('static', filename='images/bookshelf_bg.jpg') }}") no-repeat center center fixed;
-    background-size: cover; /* Ensures the image covers the entire area */
-    background-attachment: fixed; /* Makes the background image fixed during scroll */
-    min-width: 100vw;
-    min-height: 100vh; /* Ensures the background covers the entire viewport height */
-    margin: 0; /* Removes default margins */
-    padding: 0; /* Removes default paddings */
-    color: white;
+  .bookshelf-container {
     display: flex;
-    flex-direction: column;
-    align-items: center;
     justify-content: center;
-}
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f5f5f5;
+    position: relative;
+  }
 
-/* Base styles for custom buttons */
-.custom-button {
-    position: absolute; /* Allows precise positioning */
-    width: 100px; /* Adjust size as needed */
-    height: 400px; /* Adjust size as needed */
-    opacity: 50; /* Fully transparent */
-    background: yellowgreen; /* Ensure no background */
-    border: none; /* Remove border */
-    cursor: pointer; /* Maintain clickable functionality */
-}
+  .image-container {
+    position: relative;
+    width: 80%; /* Adjustable for responsiveness */
+  }
 
-/* Custom positions for each button */
-.poem {
-    top: 10%; /* Adjust as needed */
-    left: 20%; /* Adjust as needed */
-}
+  .centered-image {
+    width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+  }
 
-.quote {
-    top: 10%; /* Adjust as needed */
-    left: 45%; /* Adjust as needed */
-}
+  /* Custom buttons for hoverable and clickable sections */
+  .custom-button {
+    position: absolute;
+    background: rgba(255, 255, 255, 0.5); /* Semi-transparent */
+    border: 1px solid #ccc;
+    cursor: pointer;
+    border-radius: 5px;
+    opacity: 0.8;
+    transition: opacity 0.3s, transform 0.3s;
+  }
 
+  .custom-button:hover {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+
+  /* Position of the "Poem" button */
+  .poem {
+    top: 10%; /* Position relative to the image */
+    left: 20%;
+    width: 10%; /* Proportional width */
+    height: 40%; /* Proportional height */
+  }
+
+  /* Position of the "Quote" button */
+  .quote {
+    top: 10%;
+    left: 45%;
+    width: 10%; /* Proportional width */
+    height: 40%; /* Proportional height */
+  }
 
   /* Style for the popup modal */
   #popup {
@@ -111,6 +115,7 @@
     left: 50%;
     transform: translate(-50%, -50%);
     background-color: white;
+    color: black;
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);

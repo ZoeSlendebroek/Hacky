@@ -47,7 +47,7 @@
             id="bookshelf"
             href="{{ url_for('views.bookshelf') }}"
           >
-            MySpace
+            Journal Nook
           </a>
           <a class="nav-item nav-link" id="logout" href="/logout">Logout</a>
           {% else %}
@@ -107,3 +107,20 @@
     {% endblock %}
   </body>
 </html>
+
+<style>
+  .navbar.bg-transparent {
+    background-color: transparent !important; /* Fully transparent */
+    border: none; /* Remove borders if necessary */
+  }
+
+  /* Adjust text colors for better visibility on transparent background */
+  .navbar-nav .nav-link {
+    color: black !important;
+    font-weight: bold;
+  }
+
+  .navbar-nav .nav-link:hover {
+    color: darkgray !important;
+  }
+</style>
