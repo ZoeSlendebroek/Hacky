@@ -1,39 +1,51 @@
 {% extends "base.html" %}
 {% block title %}Home{% endblock %}
 
+
 {% block content %}
 <div class="home-background">
-  <div class="center-wrapper wide-container flex-container">
-    <!-- Left-aligned Heading with Background PNG -->
-    <div class="heading-container">
-      <div class="heading-background">
-        <h3 class="left-aligned-heading climate-crisis-heading">
-          <span class="small-text">✶ What’s on </span><br>
-          <span class="small-text">your mind? ✶</span>
-        </h3>
-      </div>
-    </div> 
-    <!-- Journal Entry Form -->
-    <div class="form-container">
-      <form method="POST">
-        <textarea name="note" id="note" class="form-control extra-large-textbox"></textarea>
-        <br />
-        <div align="center" style="margin-top: 20px;">
-          <button type="submit" class="btn btn-custom">Store in Nook</button>
-        </div>
-      </form>
-    </div>
-      <!-- Link to Bookshelf Page -->
-      <div align="center" style="margin-top: 20px;">
-        <a href="{{ url_for('views.bookshelf') }}" class="btn btn-custom">Go to Bookshelf</a>
-      </div>
-    </div>
-  </div>
-  </div>
+ <div class="center-wrapper wide-container flex-container">
+   <!-- Left-aligned Heading with Background PNG -->
+   <div class="heading-container">
+     <div class="heading-background">
+       <h3 class="left-aligned-heading climate-crisis-heading">
+         <span class="small-text">✶ What’s on </span><br>
+         <span class="small-text">your mind? ✶</span>
+       </h3>
+     </div>
+   </div>
 
-  <!-- Scrolling Text -->
-  <div class="scrolling-text climate-crisis">
-    <p>Your thoughts, your journey, your creativity ✶ Your thoughts, your journey, your creativity ✶ Your thoughts, your journey, your creativity ✶</p>
-  </div>
+
+<!-- Text Box Section -->
+<div class="text-box-container mt-4">
+ <form method="POST" action="/save-entry">
+   <textarea
+     class="form-control text-box"
+     id="journalEntry"
+     name="journalEntry"
+     rows="5"
+   ></textarea>
+   <button class="button-55" role="button">Save Entry</button>
+ </form>
+</div>
+
+
+
+
+   <!-- Link to Bookshelf Page -->
+   <div align="center" style="margin-top: 20px;">
+     <a href="{{ url_for('views.bookshelf') }}" class="button-55">Go to Bookshelf</a>
+   </div>
+ </div>
+</div>
+
+
+ <!-- Scrolling Text -->
+ <div class="scrolling-text climate-crisis">
+   <p>Your thoughts, your journey, your creativity ✶ Your thoughts, your journey, your creativity ✶ Your thoughts, your journey, your creativity ✶</p>
+ </div>
 </div>
 {% endblock %}
+
+
+

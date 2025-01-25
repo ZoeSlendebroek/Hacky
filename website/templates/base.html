@@ -1,195 +1,212 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link
-      rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
-      crossorigin="anonymous"
-    />
-    <link
-      rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
-      crossorigin="anonymous"
-    />
+ <head>
+   <meta charset="utf-8" />
+   <meta name="viewport" content="width=device-width, initial-scale=1" />
+   <link
+     rel="stylesheet"
+     href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+     integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+     crossorigin="anonymous"
+   />
+   <link
+     rel="stylesheet"
+     href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+     crossorigin="anonymous"
+   />
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Climate+Crisis&display=swap" rel="stylesheet">
 
-    <title>{% block title %}Home{% endblock %}</title>
-    <style>
-      /* Set black text color for navbar links */
-      .navbar-nav .nav-link {
-        color: black !important;
-      }
+   <link rel="preconnect" href="https://fonts.googleapis.com">
+   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+   <link href="https://fonts.googleapis.com/css2?family=Climate+Crisis&display=swap" rel="stylesheet">
 
-      /* Add spacing around the Bookshelf link */
-      .navbar-nav .nav-link.bookshelf-link {
-        margin-left: 20px;
-        margin-right: 20px;
-      }
-    </style>
-  </head>
-  <body>
-    <nav class="navbar navbar-expand-lg navbar-dark">
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-toggle="collapse"
-        data-target="#navbar"
-      >
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbar">
-        <div class="navbar-nav">
-          {% if user.is_authenticated %}
-          <!-- Left-Aligned Link -->
-          <a
-            class="nav-item nav-link bookshelf-link journal-nook-title"
-            id="bookshelf"
-            href="{{ url_for('views.bookshelf') }}"
-          >
-            Journal Nook
-          </a>
-        </div>
-        <!-- Right-Aligned Links -->
-        <div class="navbar-nav ml-auto">
-          <a class="nav-item nav-link climate-crisis" id="home" href="/">Home</a>
-          <a class="nav-item nav-link climate-crisis" id="logout" href="/logout">Logout</a>
-        </div>
-        {% else %}
-        <!-- Right-Aligned Links for Non-Authenticated Users -->
-        <div class="navbar-nav ml-auto">
-          <a class="nav-item nav-link" id="login" href="/login">Login</a>
-          <a class="nav-item nav-link" id="signUp" href="/sign-up">Sign Up</a>
-        </div>
-        {% endif %}
-      </div>
-    </nav>
-    
-    {% with messages = get_flashed_messages(with_categories=true) %} {% if
-    messages %} {% for category, message in messages %} {% if category ==
-    'error' %}
-    <div class="alert alert-danger alter-dismissable fade show" role="alert">
-      {{ message }}
-      <button type="button" class="close" data-dismiss="alert">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
-    {% else %}
-    <div class="alert alert-success alter-dismissable fade show" role="alert">
-      {{ message }}
-      <button type="button" class="close" data-dismiss="alert">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
-    {% endif %} {% endfor %} {% endif %} {% endwith %}
 
-    <div class="container">{% block content %} {% endblock %}</div>
-    <script
-      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxh4U9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-      crossorigin="anonymous"
-    ></script>
+   <title>{% block title %}Home{% endblock %}</title>
+   <style>
+     /* Set black text color for navbar links */
+     .navbar-nav .nav-link {
+       color: black !important;
+     }
 
-    {% block javascript %}
-    <script type="text/javascript">
-      function deleteNote(noteId) {
-        fetch("/delete-note", {
-          method: "POST",
-          body: JSON.stringify({ noteId: noteId }),
-        }).then((_res) => {
-          window.location.href = "/";
-        });
-      }
-    </script>
-    {% endblock %}
-  </body>
+
+     /* Add spacing around the Bookshelf link */
+     .navbar-nav .nav-link.bookshelf-link {
+       margin-left: 20px;
+       margin-right: 20px;
+     }
+   </style>
+ </head>
+ <body>
+   <nav class="navbar navbar-expand-lg navbar-light">
+     <button
+       class="navbar-toggler"
+       type="button"
+       data-toggle="collapse"
+       data-target="#navbar"
+     >
+       <span class="navbar-toggler-icon"></span>
+     </button>
+     <div class="collapse navbar-collapse" id="navbar">
+       <div class="navbar-nav">
+         {% if user.is_authenticated %}
+         <!-- Left-Aligned Link -->
+         <a
+           class="nav-item nav-link bookshelf-link journal-nook-title"
+           id="bookshelf"
+           href="{{ url_for('views.bookshelf') }}"
+         >
+           Journal Nook
+         </a>
+       </div>
+       <!-- Right-Aligned Links -->
+       <div class="navbar-nav ml-auto">
+         <a class="nav-item nav-link climate-crisis" id="home" href="/">Home</a>
+         <a class="nav-item nav-link climate-crisis" id="logout" href="/logout">Logout</a>
+       </div>
+       {% else %}
+       <!-- Right-Aligned Links for Non-Authenticated Users -->
+       <div class="navbar-nav ml-auto">
+         <a class="nav-item nav-link" id="login" href="/login">Login</a>
+         <a class="nav-item nav-link" id="signUp" href="/sign-up">Sign Up</a>
+       </div>
+       {% endif %}
+     </div>
+   </nav>
+  
+   {% with messages = get_flashed_messages(with_categories=true) %} {% if
+   messages %} {% for category, message in messages %} {% if category ==
+   'error' %}
+   <div class="alert alert-danger alter-dismissable fade show" role="alert">
+     {{ message }}
+     <button type="button" class="close" data-dismiss="alert">
+       <span aria-hidden="true">&times;</span>
+     </button>
+   </div>
+   {% else %}
+   <div class="alert alert-success alter-dismissable fade show" role="alert">
+     {{ message }}
+     <button type="button" class="close" data-dismiss="alert">
+       <span aria-hidden="true">&times;</span>
+     </button>
+   </div>
+   {% endif %} {% endfor %} {% endif %} {% endwith %}
+
+
+   <div class="container">{% block content %} {% endblock %}</div>
+   <script
+     src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+     integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+     crossorigin="anonymous"
+   ></script>
+   <script
+     src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+     integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxh4U9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+     crossorigin="anonymous"
+   ></script>
+   <script
+     src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+     integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+     crossorigin="anonymous"
+   ></script>
+
+
+   {% block javascript %}
+   <script type="text/javascript">
+     function deleteNote(noteId) {
+       fetch("/delete-note", {
+         method: "POST",
+         body: JSON.stringify({ noteId: noteId }),
+       }).then((_res) => {
+         window.location.href = "/";
+       });
+     }
+   </script>
+   {% endblock %}
+ </body>
 </html>
 
 
 <style>
-  .navbar {
-  background-color: #638eed !important; /* Ensure the navbar background is applied */
+ .navbar {
+ background-color: #638eed !important; /* Ensure the navbar background is applied */
 
-  }
 
-  /* Adjust text colors for better visibility on transparent background */
-  .navbar-nav .nav-link {
-    color: white !important;
-    font-weight: bold;
-  }
+ }
 
-  .navbar-nav .nav-link:hover {
-    color: darkgray !important;
-  }
 
-  .heading-spacing {
-  margin-bottom: 35px; /* Adds space below the heading */
-  }
+ /* Adjust text colors for better visibility on transparent background */
+ .navbar-nav .nav-link {
+   color: white !important;
+   font-weight: bold;
+ }
 
- 
 
-  .navbar-logo {
-  height: 80px; /* Adjust to the desired logo height */
-  width: auto; /* Maintain aspect ratio */
-  margin-right: 10px; /* Optional: Add spacing if needed */
-  }
+ .navbar-nav .nav-link:hover {
+   color: darkgray !important;
+ }
+
+
+ .heading-spacing {
+ margin-bottom: 35px; /* Adds space below the heading */
+ }
+
+
+
+
+ .navbar-logo {
+ height: 80px; /* Adjust to the desired logo height */
+ width: auto; /* Maintain aspect ratio */
+ margin-right: 10px; /* Optional: Add spacing if needed */
+ }
+
+
+
 
 
 
 /* Reset body and html for full-screen coverage */
 html, body {
-  background-color: #638eed;
-  margin: 0;
-  padding: 0;
-  width: 100%; /* Ensure full width of the viewport */
-  height: 100%; /* Ensure full height of the viewport */
-  overflow-x: hidden; /* Prevent horizontal scrolling */
+ background-color: #638eed;
+ margin: 0;
+ padding: 0;
+ width: 100%; /* Ensure full width of the viewport */
+ height: 100%; /* Ensure full height of the viewport */
+ overflow-x: hidden; /* Prevent horizontal scrolling */
 }
+
 
 .journal-nook-title {
-  font-family: 'Climate Crisis', sans-serif;
-  font-size: 32px; /* Larger font size for emphasis */
-  font-weight: 400; /* Regular weight */
-  font-style: normal; /* Normal style */
-  color: white; /* Set the font color */
-  letter-spacing: 2px; /* Optional: Add spacing between letters for emphasis */
-  margin-right: 20px; /* Add spacing between the title and the next link */
+ font-family: 'Climate Crisis', sans-serif;
+ font-size: 32px; /* Larger font size for emphasis */
+ font-weight: 400; /* Regular weight */
+ font-style: normal; /* Normal style */
+ color: white; /* Set the font color */
+ letter-spacing: 2px; /* Optional: Add spacing between letters for emphasis */
+ margin-right: 20px; /* Add spacing between the title and the next link */
 }
+
 
 .climate-crisis {
-  font-family: 'Climate Crisis', serif; /* Use the Climate Crisis font */
-  font-optical-sizing: auto; /* Enable automatic optical sizing */
-  font-weight: 400; /* Regular font weight */
-  font-style: normal; /* Regular font style */
-  font-size: 18px; /* Adjust font size to your preference */
-  font-variation-settings: "YEAR" 1979; /* Optional: Use variation settings if needed */
-  color: white;
+ font-family: 'Climate Crisis', serif; /* Use the Climate Crisis font */
+ font-optical-sizing: auto; /* Enable automatic optical sizing */
+ font-weight: 400; /* Regular font weight */
+ font-style: normal; /* Regular font style */
+ font-size: 18px; /* Adjust font size to your preference */
+ font-variation-settings: "YEAR" 1979; /* Optional: Use variation settings if needed */
+ color: white;
 }
 
+
 .climate-crisis-heading {
-  font-family: 'Climate Crisis', serif; /* Use the Climate Crisis font */
-  font-size: 30px; /* Adjust the font size to make it larger */
-  font-weight: normal; /* Optional: Keep the default font weight */
-  line-height: 1.2; /* Optional: Adjust line spacing if needed */
-  text-align: center; /* Ensure the text is centered */
-  color: white; /* Optional: Set a custom color */
-  margin-bottom: 20px; /* Add space below the heading */
+ font-family: 'Climate Crisis', serif; /* Use the Climate Crisis font */
+ font-size: 30px; /* Adjust the font size to make it larger */
+ font-weight: normal; /* Optional: Keep the default font weight */
+ line-height: 1.2; /* Optional: Adjust line spacing if needed */
+ text-align: center; /* Ensure the text is centered */
+ color: white; /* Optional: Set a custom color */
+ margin-bottom: 20px; /* Add space below the heading */
 }
+
 
 .scrolling-text {
  position: fixed; /* Keep the text fixed at the bottom */
@@ -204,19 +221,21 @@ html, body {
 
 
 .scrolling-text p {
-  display: inline-block;
-  white-space: nowrap; /* Prevent text from wrapping */
-  animation: scroll 50s linear infinite; /* Smooth infinite scrolling */
+ display: inline-block;
+ white-space: nowrap; /* Prevent text from wrapping */
+ animation: scroll 50s linear infinite; /* Smooth infinite scrolling */
 }
 
+
 @keyframes scroll {
-  0% {
-    transform: translateX(100%); /* Start text off-screen on the right */
-  }
-  100% {
-    transform: translateX(-100%); /* Move text off-screen to the left */
-  }
+ 0% {
+   transform: translateX(100%); /* Start text off-screen on the right */
+ }
+ 100% {
+   transform: translateX(-100%); /* Move text off-screen to the left */
+ }
 }
+
 
 
 
@@ -250,25 +269,102 @@ html, body {
 
 
 
+
 /* Left-aligned Heading */
 .left-aligned-heading {
-  font-family: 'Climate Crisis', serif; /* Climate Crisis font */
-  color: white; /* Text color */
-  text-align: left; /* Ensure left alignment */
-  margin: 0; /* Remove extra margins */
-  line-height: 1.2; /* Line spacing between the lines */
+ font-family: 'Climate Crisis', serif; /* Climate Crisis font */
+ color: white; /* Text color */
+ text-align: left; /* Ensure left alignment */
+ margin: 0; /* Remove extra margins */
+ line-height: 1.2; /* Line spacing between the lines */
 }
+
 
 /* Smaller Text for "What’s on" */
 .small-text {
-  font-size: 60px; /* Smaller font size */
-  font-weight: normal; /* Optional: Keep lighter weight */
+ font-size: 60px; /* Smaller font size */
+ font-weight: normal; /* Optional: Keep lighter weight */
 }
+
 
 /* Larger Text for "your mind?" */
 .large-text {
-  font-size: 80px; /* Larger font size */
-  font-weight: bold; /* Optional: Make it bold */
+ font-size: 80px; /* Larger font size */
+ font-weight: bold; /* Optional: Make it bold */
 }
+
+
+
+
+.text-box-container {
+ display: flex;
+ flex-direction: column;
+ align-items: flex-end; /* Align to the right */
+ justify-content: flex-start; /* Optional: Adjust vertical alignment */
+ margin-top: 700px; /* Move the text box down */
+ margin-right: 250px; /* Ensure some padding from the right edge */
+ position: relative; /* Ensure proper placement */
+}
+
+
+.text-box {
+ width: 100%;
+ max-width: 1000px; /* Increase maximum width to make the text box wider */
+ font-size: 18px; /* Increase font size for better readability */
+ border-radius: 15px; /* Slightly rounder edges for better aesthetics */
+ border: 3px solid #638eed; /* Thicker border for a more prominent outline */
+ padding: 80px; /* Increase padding for more spacing inside the text box */
+ resize: none; /* Prevent resizing */
+ text-align: left; /* Ensure left alignment inside the text box */
+ height: 300px; /* Increase height to make the text box taller */
+}
+
+
+.button-55 {
+ align-self: center;
+ background-color: #fff;
+ background-image: none;
+ background-position: 0 90%;
+ background-repeat: repeat no-repeat;
+ background-size: 4px 3px;
+ border-radius: 15px 225px 255px 15px 15px 255px 225px 15px;
+ border-style: solid;
+ border-width: 2px;
+ box-shadow: rgba(0, 0, 0, .2) 15px 28px 25px -18px;
+ box-sizing: border-box;
+ color: #41403e;
+ cursor: pointer;
+ display: inline-block;
+ font-family: Neucha, sans-serif;
+ font-size: 1rem;
+ line-height: 23px;
+ outline: none;
+ padding: .75rem;
+ text-decoration: none;
+ transition: all 235ms ease-in-out;
+ border-bottom-left-radius: 15px 255px;
+ border-bottom-right-radius: 225px 15px;
+ border-top-left-radius: 255px 15px;
+ border-top-right-radius: 15px 225px;
+ user-select: none;
+ -webkit-user-select: none;
+ touch-action: manipulation;
+ margin-top: 20px;
+}
+
+
+.button-55:hover {
+ background-color: #ffe54c;
+ box-shadow: rgba(0, 0, 0, 0.3) 2px 8px 8px -5px;
+ transform: translate3d(0, 2px, 0);
+}
+
+
+.button-55:focus {
+ box-shadow: rgba(0, 0, 0, .3) 2px 8px 4px -6px;
+}
+
+
+
 
 </style>
