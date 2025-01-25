@@ -1,3 +1,50 @@
-<h2>Generated Poem</h2>
-<p>{{ poem }}</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Open Book Popup</title>
+  
+</head>
+<body>
+  <div class="popup">
+    <div class="image-container">
+      <!-- Curved rainbow text -->
+      <svg viewBox="0 0 400 100">
+        <defs>
+          <linearGradient id="rainbow-gradient" gradientUnits="userSpaceOnUse" x1="0" x2="400" y1="0" y2="0">
+            <stop offset="0%" stop-color="##3B82F6" /> <!-- Bold Orange -->
+            <stop offset="20%" stop-color="##3B82F6" /> <!-- Bright Yellow -->
+            <stop offset="40%" stop-color="#22C55E" /> <!-- Soft Lime Green -->
+            <stop offset="60%" stop-color="#33C4FF" /> <!-- Bold Sky Blue -->
+            <stop offset="80%" stop-color="#B05EFF" /> <!-- Vibrant Purple -->
+            <stop offset="100%" stop-color="#FF33C4" /> <!-- Hot Pink -->
+          </linearGradient>
+        </defs>
+        <path id="curve" d="M50,80 C150,10 250,10 350,80" fill="none" stroke="none" />
+        <text>
+          <textPath href="#curve" startOffset="50%">
+            Your Daily Poem
+          </textPath>
+        </text>
+      </svg>
 
+      <img class="Book" src="{{ url_for('static', filename='images/Book.png') }}" alt="Open Book">
+      <div class="poem-container">
+        <!-- Display the mock poem dynamically -->
+        <p>
+          {{ poem }}
+        </p>
+      </div>
+    </div>
+    <button class="close-popup" onClick="closePopup()">&times;</button>
+  </div>
+
+  <script>
+    function closePopup() {
+      document.querySelector('.popup').style.display = 'none';
+    }
+  </script>
+</body>
+</html>

@@ -18,7 +18,6 @@
   <div id="popup" style="display: none;">
     <div id="popup-content"></div>
     <div align="center" style="margin-top: 10px;">
-      <button class="btn btn-secondary" onClick="closePopup()">Close</button>
     </div>
   </div>
 </div>
@@ -137,17 +136,7 @@
     overflow: hidden; /* Remove scrolling */
   }
 
- /* Blurred background effect for the overlay */
-#popup-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.4); /* Semi-transparent overlay */
-  backdrop-filter: blur(3px); /* Add blur to the background */
-  z-index: 999;
-}
+
 
   /* Style for the "X" close button */
   .close-popup {
@@ -165,5 +154,85 @@
   .close-popup:hover {
     color: rgb(231, 144, 144); /* Optional: Change color on hover */
   }
+
+  .popup {
+      width: 400px;
+      height: 400px;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      text-align: center;
+    }
+
+
+  /* Blurred background effect for the overlay */
+  #popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(217, 209, 214, 0.397); /* Semi-transparent overlay */
+    backdrop-filter: blur(3px); /* Add blur to the background */
+    z-index: 999;
+  }
+
+    .image-container {
+      position: relative;
+      width: 700px;
+      height: auto;
+    }
+
+    .Book {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+  
+  svg {
+    position: absolute;
+    top: -20px; /* Adjusted positioning to give space */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    height: 150px; /* Increased height for larger text */
+  }
+
+    text {
+      font-family: 'Dancing Script', cursive;
+      font-size: 24px;
+      fill: url(#rainbow-gradient);
+      text-anchor: middle;
+      dominant-baseline: middle;
+    }
+
+    .poem-container {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: black;
+      font-size: 16px;
+      font-family: Arial, sans-serif;
+      line-height: 1.5;
+    }
+
+    .close-popup {
+      position: absolute;
+      bottom: 250px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: none;
+      border: none;
+      font-size: 24px;
+      font-weight: bold;
+      color: #333;
+      cursor: pointer;
+    }
+
+    .close-popup:hover {
+      color: rgb(231, 144, 144);
+    }
 </style>
 {% endblock %}
