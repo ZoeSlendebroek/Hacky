@@ -29,3 +29,4 @@ class Book(db.Model):
     quote = db.Column(db.String(5000))  # Quote can be nullable if it's optional
     date = db.Column(db.DateTime(timezone=True), default=func.now(), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)  # Foreign key with not null constraint
+

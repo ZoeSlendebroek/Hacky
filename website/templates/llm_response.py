@@ -1,6 +1,5 @@
 import json
 from langchain_core.prompts import ChatPromptTemplate
-from langchain_openai import ChatOpenAI
 
 class LLMResponse:
     def __init__(self, model, journal):

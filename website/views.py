@@ -1,13 +1,24 @@
 from flask import Blueprint, render_template, request, flash, jsonify
 from flask_login import login_required, current_user
-from .models import Note
+from .models import Note, Book
 from . import db
 import json
 import requests
+from llm_response import LLMResponse
+from langchain_openai import ChatOpenAI
 
 views = Blueprint('views', __name__)
 API_URL = "https://henry'surl.com/generate" 
 
+
+# model object
+GPT_TOKEN = ""
+core = ChatOpenAI(
+    openai_api_key=GPT_TOKEN,
+    temperature=1.5,
+    max_tokens=5000,
+    model_name="gpt-4o-mini"
+)
 
 @views.route('/', methods=['GET', 'POST'])
 @login_required
@@ -32,28 +43,44 @@ def home():
             # Send a POST request to your friend's API
      
             try:
-                #response = requests.post(API_URL, json={"notes": notes_data})
-                #if response.status_code == 200:
-                    # API call was successful
-                #    result = response.json()
-                #    flash(f"Generated Poem: {result.get('poem', 'No poem received')}", category='success')
-                #    flash(f"Generated Quote: {result.get('quote', 'No quote received')}", category='success')
-                #else:
-                    # Handle API errors
-                #  flash(f"API Error: {response.status_code} - {response.text}", category='error')
-                mock_response = {
-                    "poem": "a is a b is b and c is s",
-                    "quote": "this is the most amazing poem ever"
-                }
+                journal = compile_journal(notes_data)
+                gen_poem = generate_poem(journal)["poem"]
+                gen_quote = json.dumps(generate_quotes(journal))
+
+                
+                 # store the JSON in book db
+                new_book = Book(poem=gen_poem, quote=gen_quote, user_id=current_user.id)
+                db.session.add(new_book)
+                db.session.commit()
+
                 # Use the mock response for now
-                flash(f"Generated Poem: {mock_response.get('poem')}", category='success')
-                flash(f"Generated Quote: {mock_response.get('quote')}", category='success')
+                flash(f"Poem Generated Successfully", category='success')
+                flash(f"Quote Generated Successfully", category='success')
             except Exception as e:
                 # Handle request errors
                 flash(f"Request failed: {e}", category='error')
          
 
     return render_template("home.html", user=current_user)
+
+
+def compile_journal(notes):
+    output_string = ""
+    for note in notes:
+        output_string += f"{note[0]}\n\n{note[1]}\n\n"
+    return output_string
+
+def generate_poem(journal):
+    llm_response = LLMResponse(core, journal)
+    poem = llm_response.poem_response()
+    return poem
+##
+
+def generate_quotes(journal):
+    llm_response = LLMResponse(core, journal)
+    quote = llm_response.quote_response()
+    return quote
+
 
 @views.route('/popup_poem', methods=['GET'])
 @login_required
