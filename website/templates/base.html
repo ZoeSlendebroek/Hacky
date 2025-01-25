@@ -41,23 +41,34 @@
       <div class="collapse navbar-collapse" id="navbar">
         <div class="navbar-nav">
           {% if user.is_authenticated %}
-          <a class="nav-item nav-link" id="home" href="/">Home</a>
+          <!-- Left-Aligned Link -->
           <a
             class="nav-item nav-link bookshelf-link"
             id="bookshelf"
             href="{{ url_for('views.bookshelf') }}"
           >
-            Journal Nook
+          <img
+          src="{{ url_for('static', filename='images/journalnook.png') }}"
+          alt="Journal Nook Logo"
+          class="navbar-logo"
+        />
           </a>
+        </div>
+        <!-- Right-Aligned Links -->
+        <div class="navbar-nav ml-auto">
+          <a class="nav-item nav-link" id="home" href="/">Home</a>
           <a class="nav-item nav-link" id="logout" href="/logout">Logout</a>
-          {% else %}
+        </div>
+        {% else %}
+        <!-- Right-Aligned Links for Non-Authenticated Users -->
+        <div class="navbar-nav ml-auto">
           <a class="nav-item nav-link" id="login" href="/login">Login</a>
           <a class="nav-item nav-link" id="signUp" href="/sign-up">Sign Up</a>
-          {% endif %}
         </div>
+        {% endif %}
       </div>
     </nav>
-
+    
     {% with messages = get_flashed_messages(with_categories=true) %} {% if
     messages %} {% for category, message in messages %} {% if category ==
     'error' %}
@@ -123,4 +134,69 @@
   .navbar-nav .nav-link:hover {
     color: darkgray !important;
   }
+
+  .heading-spacing {
+  margin-bottom: 35px; /* Adds space below the heading */
+  }
+
+  .center-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: calc(100vh - 300px); /* Adjust for navbar height */
+  text-align: center;
+  margin: 0;
+  }
+
+  /* Increase the container size */
+  .wide-container {
+  width: 90%; /* Make the container wider */
+  max-width: 1200px; /* Allow it to stretch more on larger screens */
+  margin: 0 auto; /* Center it horizontally */
+  text-align: center;
+  }
+
+/* Make the text box extra large */
+  .extra-large-textbox {
+  resize: none; /* Disable resizing */
+  width: 100%; /* Full width of the container */
+  height: 500px; /* Increased height */
+  padding: 20px; /* Add extra padding for comfort */
+  font-size: 18px; /* Increase font size for readability */
+  border: 1px solid #ced4da; /* Border styling */
+  border-radius: 6px; /* Smooth rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for a modern look */
+  }
+
+  .navbar-logo {
+  height: 100px; /* Adjust to the desired logo height */
+  width: auto; /* Maintain aspect ratio */
+  margin-right: 10px; /* Optional: Add spacing if needed */
+  }
+
+  .btn-custom {
+  background-color: #004F70; /* Set the button background color */
+  border-color: #004F70; /* Match the border color */
+  color: white; /* Set the text color to white for contrast */
+  font-family: 'Helvetica', sans-serif;
+  font-weight: bold; /* Make the text bold (optional) */
+  font-size: 12px; /* Set the font size smaller */
+  padding: 8px 16px; /* Adjust padding to match the smaller font */
+  border-radius: 4px; /* Optional: Slightly rounded corners */
+}
+
+.btn-custom:hover {
+  background-color: #003A53; /* Slightly darker shade for hover effect */
+  border-color: #003A53; /* Match the border color on hover */
+  color: white; /* Ensure the text color remains white */
+}
+
+.custom-font {
+  font-family: 'Papyrus', sans-serif; /* Set font to Papyrus */
+  font-size: 45px; /* Adjust font size as needed */
+  font-weight: normal; /* Optional: Adjust font weight */
+  color: #004F70; /* Optional: Change font color to match your design */
+}
+
 </style>
