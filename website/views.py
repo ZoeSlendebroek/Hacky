@@ -150,10 +150,9 @@ def popup_entry():
 
         # Prepare the entries in the format "date : entry"
         formatted_entries = [
-            f"{note.date.strftime('%Y-%m-%d %H:%M:%S')} : {note.data}"
+            f"{note.date.strftime('%B %d, %Y')} : {note.data}"
             for note in entries
         ]
-
 
         return render_template('popup_entry.html', entries=formatted_entries)
     except Exception as e:
