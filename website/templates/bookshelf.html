@@ -5,7 +5,7 @@
 <div class="bookshelf-container">
   <!-- Centered Image -->
   <div class="image-container">
-    <img src="{{ url_for('static', filename='images/bookshelf_bg.jpg') }}" alt="Bookshelf" class="centered-image" />
+    <img src="{{ url_for('static', filename='images/bookshelf_bg.png') }}" alt="Bookshelf" class="centered-image" />
     
     <!-- Hoverable and Clickable Sections -->
     <button class="custom-button poem" onClick="openPopup('{{ url_for('views.popup_poem') }}')"></button>
@@ -81,14 +81,15 @@
   }
 
   /* Custom buttons for hoverable and clickable sections */
+  
   .custom-button {
     position: absolute;
     background-size: cover; /* Ensures the background image covers the button */
     background-position: center; /* Centers the background image */
-    border: none;
+    background-color: transparent;
     cursor: pointer;
-    border-radius: 5px;
-    opacity: 0.9;
+    border: none;
+    opacity: 1;
     transition: opacity 0.3s, transform 0.3s;
   }
 
@@ -100,34 +101,47 @@
   /* Position of the "Poem" button */
   .poem {
     top: 10%;
-    left: 20%;
-    width: 10%;
+    left: 10.3%;
+    width: 30%;
     height: 40%;
     background-image: url('{{ url_for("static", filename="images/poem.png") }}');
+    background-size: contain;
+    background-repeat: no-repeat;
+    clip-path: inset(0px 100px 0px 100px);
   }
 
   /* Position of the "Quote" button */
   .quote {
-    top: 8%;
-    left: 45%;
-    width: 8%;
+    top: 6%;
+    left: 39%;
+    width: 20%;
     height: 46%;
     background-image: url('{{ url_for("static", filename="images/quote.png") }}');
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    max-width: 80%;
+    max-height: 80%;
+    clip-path: inset(30px 50px 30px 40px);
   }
 
 
   .entry {
-    top: 81.5%;
-    left: 47%;
+    top: 66.5%;
+    left: 51%;
     width: 35%;
-    height: 10%;
+    height: 40%;
     background-image: url('{{ url_for("static", filename="images/entry.png") }}');
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    clip-path: inset(70px 50px 70px 60px);
   }
 
   /* Style for the popup modal */
-  #popup {
+    #popup {
     position: fixed;
-    top: 50%;
+    top: 30%;
     left: 50%;
     transform: translate(-50%, -50%);
     background-color: transparent; /* Transparent background */
@@ -138,21 +152,35 @@
     width: 90%; /* Adjust width to ensure enough space */
     height: auto; /* Let the height adjust based on the content */
     max-height: none; /* Remove any height restriction */
-    overflow: hidden; /* Remove scrolling */
   }
 
+   /* Style for the popup modal */
+   #popup-entry {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: transparent; /* Transparent background */
+    padding: 20px;
+    border-radius: 10px;
+    z-index: 1000;
+    max-width: 800px; /* Increased width for large content */
+    width: 100%; /* Adjust width to ensure enough space */
+    height: auto; /* Let the height adjust based on the content */
+    max-height: none; /* Remove any height restriction */
+  }
 
 
   /* Style for the "X" close button */
   .close-popup {
     position: absolute;
-    top: 10px;
-    right: 10px;
+    top: 250px; /* Adjust the vertical position */
+    left: 150px;
     background: none;
     border: none;
     font-size: 24px; /* Make the "X" larger */
     font-weight: bold; /* Ensure it stands out */
-    color: #333; /* Set a neutral color */
+    color: #462828; /* Set a neutral color */
     cursor: pointer; /* Change the cursor to indicate it's clickable */
   }
 
@@ -168,7 +196,6 @@
       position: relative;
       text-align: center;
     }
-
   .popup-entry {
     display: flex;
     justify-content: center; /* Horizontally center the content */
@@ -200,7 +227,19 @@
       height: auto;
     }
 
-    .Book {
+    .image-container-popup{
+  
+  position: relative;
+  width: 90%;
+  height: auto;
+  text-align: center;
+  margin-top: 50px; /* Adjust this value to move the image lower */
+
+
+}
+
+  
+  .Book {
       width: 100%;
       height: auto;
       display: block;
@@ -210,12 +249,13 @@
       width: 100%;
       height: auto;
       display: block;
+      margin-top: 200px; 
     }
 
   
   svg {
     position: absolute;
-    top: -20px; /* Adjusted positioning to give space */
+    top: 70px; /* Adjusted positioning to give space */
     left: 50%;
     transform: translateX(-50%);
     width: 100%;
@@ -252,7 +292,7 @@
       line-height: 1.5;
     }
 
-    .-container {
+    .entry-container {
       position: absolute;
       top: 50%;
       left: 50%;
@@ -263,24 +303,8 @@
       line-height: 1.5;
     }
 
-    .close-popup {
-      position: absolute;
-      bottom: 250px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: none;
-      border: none;
-      font-size: 24px;
-      font-weight: bold;
-      color: #333;
-      cursor: pointer;
-    }
 
-    .close-popup:hover {
-      color: rgb(231, 144, 144);
-    }
-      /* New close-entry-popup class for the entry popup */
-      .close-entry-popup {
+    .close-entry-popup {
     position: absolute;
     top: 10px;
     right: 10px; /* Keep it in the upper right corner */
