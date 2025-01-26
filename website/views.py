@@ -130,6 +130,7 @@ def popup_quote():
 
 @views.route('/popup_entry', methods=['GET'])
 @login_required
+
 def popup_entry():
     try:
         # Fetch all notes for the current user, sorted by date in descending order

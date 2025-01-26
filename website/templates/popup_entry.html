@@ -1,5 +1,32 @@
-<h2>Entry</h2>
-<p>{{ entries }}</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Open Entry Popup</title>
+  <style>
+    /* Include the previous styles here */
+  </style>
+</head>
+<body>
+    <div class="popup-entry">
+        <div class="image-container-popup">
+          <h2></h2>
+          <img class="Entry" src="{{ url_for('static', filename='images/stickyNote.png') }}" alt="Open Entry">
+          <div class="entry-container">
+            <!-- Display the mock poem dynamically -->
+            <p>{{ entries }}</p>
+          </div>
+        </div>
+        <!-- Use the new class for closing the entry popup -->
+        <button class="close-entry-popup" onClick="closePopup()">&times;</button>
+      </div>
 
-
-
+  <script>
+    function closePopup() {
+      document.querySelector('.popup-entry').style.display = 'none';
+    }
+  </script>
+</body>
+</html>

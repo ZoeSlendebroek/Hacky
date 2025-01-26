@@ -73,6 +73,8 @@
     width: 100%; /* Adjustable for responsiveness */
   }
 
+  
+
   .centered-image {
     width: 100%;
     height: auto;
@@ -122,7 +124,7 @@
   /* Style for the popup modal */
   #popup {
     position: fixed;
-    top: 50%;
+    top: 30%;
     left: 50%;
     transform: translate(-50%, -50%);
     background-color: transparent; /* Transparent background */
@@ -133,7 +135,22 @@
     width: 90%; /* Adjust width to ensure enough space */
     height: auto; /* Let the height adjust based on the content */
     max-height: none; /* Remove any height restriction */
-    overflow: hidden; /* Remove scrolling */
+  }
+
+   /* Style for the popup modal */
+   #popup-entry {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: transparent; /* Transparent background */
+    padding: 20px;
+    border-radius: 10px;
+    z-index: 1000;
+    max-width: 800px; /* Increased width for large content */
+    width: 100%; /* Adjust width to ensure enough space */
+    height: auto; /* Let the height adjust based on the content */
+    max-height: none; /* Remove any height restriction */
   }
 
 
@@ -141,13 +158,13 @@
   /* Style for the "X" close button */
   .close-popup {
     position: absolute;
-    top: 10px;
-    right: 10px;
+    top: 250px; /* Adjust the vertical position */
+    left: 150px;
     background: none;
     border: none;
     font-size: 24px; /* Make the "X" larger */
     font-weight: bold; /* Ensure it stands out */
-    color: #333; /* Set a neutral color */
+    color: #462828; /* Set a neutral color */
     cursor: pointer; /* Change the cursor to indicate it's clickable */
   }
 
@@ -163,6 +180,17 @@
       position: relative;
       text-align: center;
     }
+
+    .popup-entry {
+    display: flex;
+    justify-content: center; /* Horizontally center the content */
+    align-items: center; /* Vertically center the content */
+    width: 100%; /* Take full width */
+    height: 100%; /* Take full height of the popup */
+    position: relative;
+    text-align: center;
+    flex-direction: column; /* Stack the elements vertically */
+  }
 
 
   /* Blurred background effect for the overlay */
@@ -183,16 +211,34 @@
       height: auto;
     }
 
+    .image-container-popup{
+  
+      position: relative;
+      width: 90%;
+      height: auto;
+      text-align: center;
+      margin-top: 50px; /* Adjust this value to move the image lower */
+    
+
+    }
+
     .Book {
       width: 100%;
       height: auto;
       display: block;
     }
 
+    .Entry {
+      width: 100%;
+      height: auto;
+      display: block;
+      margin-top: 200px; 
+    }
+
   
   svg {
     position: absolute;
-    top: -20px; /* Adjusted positioning to give space */
+    top: 70px; /* Adjusted positioning to give space */
     left: 50%;
     transform: translateX(-50%);
     width: 100%;
@@ -229,7 +275,7 @@
       line-height: 1.5;
     }
 
-    .-container {
+    .entry-container {
       position: absolute;
       top: 50%;
       left: 50%;
@@ -240,21 +286,25 @@
       line-height: 1.5;
     }
 
-    .close-popup {
-      position: absolute;
-      bottom: 250px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: none;
-      border: none;
-      font-size: 24px;
-      font-weight: bold;
-      color: #333;
-      cursor: pointer;
-    }
+    
 
-    .close-popup:hover {
-      color: rgb(231, 144, 144);
-    }
+
+    /* New close-entry-popup class for the entry popup */
+  .close-entry-popup {
+    position: absolute;
+    top: 10px;
+    right: 10px; /* Keep it in the upper right corner */
+    background: none;
+    border: none;
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    cursor: pointer;
+  }
+
+  .close-entry-popup:hover {
+    color: rgb(231, 144, 144);
+  }
+
 </style>
 {% endblock %}
