@@ -147,7 +147,7 @@ def popup_entry():
         for note in entries:
             print(f"ID: {note.id}, Data: {note.data}, Created At: {note.date}")
 
-
+        
         # Prepare the entries in the format "date : entry"
         formatted_entries = [
             f"{note.date.strftime('%B %d, %Y')} : {note.data}"
@@ -157,6 +157,7 @@ def popup_entry():
         return render_template('popup_entry.html', entries=formatted_entries)
     except Exception as e:
         return render_template('popup_entry.html', entries=[], error=f"Error: {e}")
+
 
 
 @views.route('/bookshelf', methods=['GET'])
