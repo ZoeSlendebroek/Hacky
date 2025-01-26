@@ -16,7 +16,11 @@
           <img class="Entry" src="{{ url_for('static', filename='images/stickyNote.png') }}" alt="Open Entry">
           <div class="entry-container">
             <!-- Display the mock poem dynamically -->
-            <p>{{ entries }}</p>
+            <u1>
+              {% for entry in entries %}
+                  <li>{{ entry }}</li>
+              {% endfor %}
+            </u1>
           </div>
         </div>
         <!-- Use the new class for closing the entry popup -->
